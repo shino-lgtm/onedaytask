@@ -20,14 +20,9 @@ function populateDateSelector() {
     selector.appendChild(option);
   }
 
-  // 今日の日付があれば選択して表示
   const todayKey = `${new Date().getMonth() + 1}/${new Date().getDate()}`;
-  if (phrases[todayKey]) {
-    selector.value = todayKey;
-    showPhrase(todayKey);
-  } else {
-    showPhrase(selector.value);
-  }
+  selector.value = phrases[todayKey] ? todayKey : Object.keys(phrases)[0];
+  showPhrase(selector.value);
 
   selector.addEventListener("change", () => {
     showPhrase(selector.value);
@@ -52,4 +47,5 @@ function speak(text) {
   window.speechSynthesis.speak(utterance);
 }
 
+// 実行
 populateDateSelector();
